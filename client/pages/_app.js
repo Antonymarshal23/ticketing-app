@@ -1,0 +1,42 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import buildClient from '../api/build-client';
+import Header from '../components/header';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+const AppComponent = ({ Component, pageProps, currentUser }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const isCustomerRoute = router.asPath.startsWith('/customer') || router.asPath.startsWith('/auth/customer');
+
+    if (isCustomerRoute) {
+      if (currentUser && currentUser.type !== 'customer') {
+        router.push('/');
+      }
+    }
+  }, [currentUser]);
+
+  return (
+    <div>
+      <Header currentUser={currentUser} />
+      <Component {...pageProps} currentUser={currentUser} />
+    </div>
+  );
+};
+
+AppComponent.getInitialProps = async appContext => {
+  const client = buildClient(appContext.ctx);
+  const { data } = await client.get('/api/users/currentuser');
+
+  let pageProps = {};
+  if (appContext.Component.getInitialProps) {
+    pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+  }
+
+  return {
+    pageProps,
+    ...data
+  };
+};
+
+export default AppComponent;
