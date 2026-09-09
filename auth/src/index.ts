@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-require('dotenv').config();
 
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
@@ -41,7 +40,7 @@ const start = async () => {
     console.log('Connected to MongoDB');
 
     // Start HTTP server only after both are connected
-    app.listen(3001, () => {
+    app.listen(3000, () => {
       console.log('Listening on port 3001');
     });
 

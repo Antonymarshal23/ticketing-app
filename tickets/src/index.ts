@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-require('dotenv').config();
 import { app } from './app';
 import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
 import { OrderCreatedListener } from './events/listeners/order-created-listener';
@@ -53,7 +52,7 @@ const start = async () => {
     console.error(err);
   }
 
-  app.listen(3002, () => {
+  app.listen(3000, () => {
     console.log('Listening on port 3002');
   });
 };
