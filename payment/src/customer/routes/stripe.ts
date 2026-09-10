@@ -26,7 +26,7 @@ router.post("/api/customers/payments", requireAuth("customer", Customer), async 
     return res.status(400).send({
       errors: [
         {
-          message: "Amount must be greater than zero.",
+          message: "Amount must be greater than zero",
         },
       ],
     });
