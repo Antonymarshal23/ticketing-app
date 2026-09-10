@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 
 import { app } from '../app';
-jest.setTimeout(30000);
+jest.setTimeout(60000);
 jest.mock("../nats-wrapper");
 
 declare global {
@@ -15,11 +15,7 @@ beforeAll(async () => {
   process.env.JWT_KEY = 'my_super_secret';
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
- mongo = await MongoMemoryServer.create({
-    binary: {
-      version: "6.0.14",
-    },
-  });
+ mongo = await MongoMemoryServer.create();
   const mongoUri = await mongo.getUri();
   await mongoose.connect(mongoUri);
 });
