@@ -15,7 +15,11 @@ beforeAll(async () => {
   process.env.JWT_KEY = "my_super_secret";
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-  mongo = await MongoMemoryServer.create();
+  mongo = await MongoMemoryServer.create({
+      binary: {
+        version: "6.0.14",
+      },
+    });
   const mongoUri = await mongo.getUri();
   await mongoose.connect(mongoUri);
 });

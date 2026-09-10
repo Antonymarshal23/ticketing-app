@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { Customer } from "../models/customer";
 import { User } from "../models/user";
-jest.setTimeout(30000);
+jest.setTimeout(60000);
 declare global {
   var signin: (type: "company" | "customer") => Promise<string[]>;
 }
@@ -15,7 +15,11 @@ beforeAll(async () => {
   process.env.JWT_KEY = "my_super_secret";
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-  mongo = await MongoMemoryServer.create();
+  mongo = await MongoMemoryServer.create({
+    binary: {
+      version: "6.0.14",
+    },
+  });
   const mongoUri = await mongo.getUri();
   await mongoose.connect(mongoUri);
 });
