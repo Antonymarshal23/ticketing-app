@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cd auth && docker build -t antony/auth .
+      - run: cd auth && docker build -t antonymarshal23/auth .
       - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push antony/auth
+      - run: docker push antonymarshal23/auth
       # - uses: digitalocean/action-doctl@v2
       #   with:
       #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN}}

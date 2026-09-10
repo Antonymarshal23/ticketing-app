@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: cd orders && docker build -t antony/orders .
+        run: cd orders && docker build -t antonymarshal23/orders .
 
       - name: Login to Docker Hub
         run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -25,4 +25,4 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image
-        run: docker push antony/orders
+        run: docker push antonymarshal23/orders
