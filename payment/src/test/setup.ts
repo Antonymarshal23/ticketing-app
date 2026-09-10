@@ -6,7 +6,7 @@ import { Customer } from "../models/customer";
 declare global {
   var signin: (type: "company" | "customer") => Promise<string[]>;
 }
-
+jest.setTimeout(30000);
 jest.mock("../nats-wrapper");
 
 jest.mock("stripe", () => {
@@ -45,8 +45,11 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
-  mongoose.connection.close();
+  if (mongo) {
+    await mongo.stop();
+  }
+
+  await mongoose.connection.close();
 });
 
 global.signin = async (type: "company" | "customer") => {

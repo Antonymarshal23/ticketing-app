@@ -11,7 +11,7 @@ const router = express.Router();
 router.post(
   '/api/customers/signin',
   [
-    body('email').isEmail().withMessage('Email must be valid'),
+    body('email').isEmail().withMessage('Email must be valid.'),
     body('password')
       .trim()
       .notEmpty()
