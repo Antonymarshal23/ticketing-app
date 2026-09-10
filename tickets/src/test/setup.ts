@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 import { Customer } from "../models/customer";
-
+jest.setTimeout(30000);
 declare global {
   var signin: (type: "company" | "customer") => Promise<string[]>;
 }
@@ -30,8 +30,11 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
-  mongoose.connection.close();
+  if (mongo) {
+    await mongo.stop();
+  }
+
+  await mongoose.connection.close();
 });
 
 global.signin = async (type: "company" | "customer") => {

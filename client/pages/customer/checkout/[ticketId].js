@@ -37,7 +37,7 @@ const CheckoutPage = ({ ticket }) => {
 
             setError(
                 err.response?.data?.errors?.[0]?.message ||
-                "Something went wrong"
+                "Something went wrong."
             );
 
             setLoading(false);
