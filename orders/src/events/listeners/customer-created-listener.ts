@@ -12,8 +12,6 @@ export class CustomerCreatedListener extends Listener<CustomerCreatedEvent> {
   async onMessage(data: CustomerCreatedEvent["data"], msg: Message) {
     console.log("CustomerCreated event received");
 
-    console.log(data);
-
     const customer = Customer.build({
       id: data.id,
       email: data.email,
